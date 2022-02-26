@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 
 export default function ClientRegister(){
     const [client, setClient] = useState({})
     const [activity, setActivity] = useState([])
     const [corporate, setCorporate] = useState([])
+    const navigate = useNavigate()
     let {id} = useParams()
 
     useEffect(()=>{
@@ -46,30 +47,25 @@ export default function ClientRegister(){
     }
 
     const sendActivity = async ()=>{
-        activity.map((x)=>{
+        try {
+            const {data} = axios.post(`http://localhost:3001/secondaryActivity/create`,activity)
+            return data
 
-            try {
-                const {data} = axios.post(`http://localhost:3001/secondaryActivity/create`,{x})
-                return data
-    
-            } catch(error) {
-                return error
-            }
-        })
+        } catch(error) {
+            return error
+        }
         
     }
 
     const sendCorporate = async ()=>{
-        corporate.map((x)=>{
 
-            try {
-                const {data} = axios.post(`http://localhost:3001/corporateStructure/create`,{x})
-                return data
-    
-            } catch(error) {
-                return error
-            }
-        })
+        try {
+            const {data} = axios.post(`http://localhost:3001/corporateStructure/create`,corporate)
+            return data
+
+        } catch(error) {
+            return error
+        }
         
     }
 
@@ -78,6 +74,8 @@ export default function ClientRegister(){
         await sendClient
         await sendActivity
         await sendCorporate
+
+        navigate('/client-list')
 
     }
 

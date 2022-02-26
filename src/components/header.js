@@ -7,6 +7,7 @@ export default function Header(){
             <header className="container">
                 <ol>
                     <li><Link to="/search">Search</Link></li>
+                    <li><Link to="/client-list">Lista de Clientes</Link></li>
                 </ol>
             </header>
         </div>
