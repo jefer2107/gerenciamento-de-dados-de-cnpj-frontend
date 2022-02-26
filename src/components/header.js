@@ -6,7 +6,7 @@ export default function Header(){
         <div className="container-fluid">
             <header className="container">
                 <ol>
-                    <li><Link to="/search">Search</Link></li>
+                    <li><Link to="/search">Consutar</Link></li>
                     <li><Link to="/client-list">Lista de Clientes</Link></li>
                 </ol>
             </header>

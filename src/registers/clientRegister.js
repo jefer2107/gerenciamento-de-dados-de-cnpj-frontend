@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import { useNavigate, useParams } from "react-router-dom"
+import validateFields from "../validateFields"
 
 
 export default function ClientRegister(){
@@ -75,7 +76,12 @@ export default function ClientRegister(){
         await sendActivity
         await sendCorporate
 
-        navigate('/client-list')
+        validateFields(client).then(()=>{
+            navigate('/client-list')
+
+        }).catch((error)=>{
+            console.log(error)
+        })
 
     }
 
