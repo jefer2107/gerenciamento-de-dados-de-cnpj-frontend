@@ -8,6 +8,7 @@ export default function Header(){
                 <ol>
                     <li><Link to="/search">Consutar</Link></li>
                     <li><Link to="/client-list">Lista de Clientes</Link></li>
+                    <li><Link to="/">Home</Link></li>
                 </ol>
             </header>
         </div>
