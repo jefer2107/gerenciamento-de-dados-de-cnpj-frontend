@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Header from '../components/header'
 
 export default function Search(){
 
@@ -16,6 +17,8 @@ export default function Search(){
     }
 
     return(
+        <>
+        <Header />
         <div className="form-style">
             <form onSubmit={redirectToCnpj} className="mx-auto">
                 <h3 className="text-center">Consultar CNPJ</h3>
@@ -23,5 +26,6 @@ export default function Search(){
                 <button type="submit" className="btn btn-primary">Enviar</button>
             </form>
         </div>
+        </>
     )
 }

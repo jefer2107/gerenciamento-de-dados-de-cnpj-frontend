@@ -1,10 +1,36 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import Header from '../components/header'
 
 
 export default function ClientData(){
-    const [clients, setClients] = useState({id:'',date:'',date_situation:'',type:'',name:'',sth:'',telephone:'',email:'',secondary_activity:[],qsa:[],situation:'',district:'',address:'',number:'',zip_code:'',city:'',company_size:'',opening:'',legal_nature:'',fantasy:'',cnpj:'',status:'',complement:'',joint_stock:''})
+    const [clients, setClients] = useState({
+        id:'',
+        date:'',
+        date_situation:'',
+        type:'',
+        name:'',
+        sth:'',
+        telephone:'',
+        email:'',
+        secondary_activity:[],
+        qsa:[],
+        situation:'',
+        district:'',
+        address:'',
+        number:'',
+        zip_code:'',
+        city:'',
+        company_size:'',
+        opening:'',
+        legal_nature:'',
+        fantasy:'',
+        cnpj:'',
+        status:'',
+        complement:'',
+        joint_stock:''
+    })
     let {id} = useParams()
 
     useEffect(()=>{
@@ -21,6 +47,8 @@ export default function ClientData(){
     },[id])
 
     return(
+        <>
+        <Header />
         <div className="list">
             {JSON.stringify(clients)}
             {console.log('Pai redenrizou')}
@@ -116,5 +144,6 @@ export default function ClientData(){
                 </tbody>
             </table>
         </div>
+        </>
     )
 }
