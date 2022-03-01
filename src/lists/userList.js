@@ -17,6 +17,23 @@ export default function UserList(){
             })
     },[id])
 
+    const removeUser = (id)=>{
+        axios.delete(`http://localhost:3001/users/${id}/removeItem`)
+            .then(()=>{
+                setUsers((state)=>{
+                    const newList = [...state]
+                    const itemToBeRemove = users.findIndex(e=> e.id == id)
+
+                    newList.splice(itemToBeRemove, 1)
+
+                    return newList
+                })
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+    }
+
     return(
         <>
         <Header />
@@ -44,7 +61,7 @@ export default function UserList(){
                                 <td> {x.admin} </td>
                                 <td>
                                     <button className="btn btn-primary">Editar</button>
-                                    <button className="btn btn-danger">Remover</button>
+                                    <button onClick={()=> removeUser(x.id)} className="btn btn-danger">Remover</button>
                                 </td>
                             </tr>
                         )

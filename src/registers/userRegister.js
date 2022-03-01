@@ -6,7 +6,6 @@ import Header from '../components/header'
 export default function UserRegister(){
     const [user, setUser] = useState({name:'',email:'',admin:'',password:''})
     const navigate = useNavigate()
-    //const [admin, setAdmin] = useState({name:'',email:'',admin1:'',admin2:'',password:''})
 
     const changeUser = ({target})=>{
         setUser((state)=>{
@@ -27,7 +26,7 @@ export default function UserRegister(){
     const registerUser = (event)=>{
         axios.post(`http://localhost:3001/users/create`,user)
             .then((x)=>{
-                console.log('cadastrou')
+                navigate("/user-list")
             })
             .catch((error)=>{
                 console.log(error)
