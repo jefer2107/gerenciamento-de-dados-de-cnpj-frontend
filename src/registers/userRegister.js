@@ -1,9 +1,11 @@
 import axios from 'axios'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Header from '../components/header'
 
 export default function UserRegister(){
     const [user, setUser] = useState({name:'',email:'',admin:'',password:''})
+    const navigate = useNavigate()
     //const [admin, setAdmin] = useState({name:'',email:'',admin1:'',admin2:'',password:''})
 
     const changeUser = ({target})=>{
