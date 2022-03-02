@@ -44,7 +44,7 @@ export default function UserRegister(){
                 <h3 className="text-center">Cadastro de usuários</h3>
                 {JSON.stringify(user)}
                 {console.log(user)}
-                <input onChange={changeUser} className="form-control" type='text' name='name' placeholder="Digite o nome" />
+                <input onChange={changeUser} className="form-control" type='text' name='nameUser' placeholder="Digite o nome" />
                 <input onChange={changeUser} className="form-control" type='email' name='email' placeholder="Digite o email" />
                 <div class="form-check">
                     <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault1" />

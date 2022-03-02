@@ -62,7 +62,7 @@ export default function UserList(){
                             <tr key={x.id}>
                                 <td> {x.id} </td>
                                 <td> {x.date} </td>
-                                <td> {x.name} </td>
+                                <td> {x.nameUser} </td>
                                 <td> {x.email} </td>
                                 <td> {x.admin} </td>
                                 <td>

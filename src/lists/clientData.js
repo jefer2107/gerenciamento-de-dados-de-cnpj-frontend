@@ -2,12 +2,14 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Header from '../components/header'
+import jwtDecoded from "jwt-decode"
 
 
 export default function ClientData(){
     const [clients, setClients] = useState({
         id:'',
         date:'',
+        user:'',
         date_situation:'',
         type:'',
         name:'',
@@ -32,10 +34,12 @@ export default function ClientData(){
         joint_stock:''
     })
     let {id} = useParams()
+    const token = localStorage.getItem('token')
+    const decoded = jwtDecoded(token !== null && token)
 
     useEffect(()=>{
         console.log('id:',id)
-        axios.get(`http://localhost:3001/clients/${id}/getOne`)
+        axios.get(`http://localhost:3001/clients/${id}/${decoded.id}/getOne`)
             .then((x)=>{
                 setClients(()=>x.data)
             })
@@ -44,6 +48,8 @@ export default function ClientData(){
             })
 
             console.log('Filho renderizou')
+
+        
     },[id])
 
     return(
@@ -51,6 +57,7 @@ export default function ClientData(){
         <Header />
         <div className="list">
             {JSON.stringify(clients)}
+            {JSON.stringify(decoded)}
             {console.log('Pai redenrizou')}
             <h3 className="text-center"> {clients !== {} && clients.name} </h3>
             <h3 className="text-center">Dados Cadastrais</h3>
@@ -78,6 +85,7 @@ export default function ClientData(){
                         <td>STATUS</td>
                         <td>COMPLEMENTO</td>
                         <td>CAPITAL SOCIAL</td>
+                        <td>USUÁRIO</td>
                         <td>AÇÕES</td>
                     </tr>
                 </thead>
@@ -104,6 +112,7 @@ export default function ClientData(){
                         <td> {clients !== {} && clients.status} </td>
                         <td> {clients !== {} && clients.complement} </td>
                         <td> {clients !== {} && clients.joint_stock} </td>
+                        <td> {clients !== {} && clients.user} </td>
                     </tr>
                 </tbody>
             </table>
