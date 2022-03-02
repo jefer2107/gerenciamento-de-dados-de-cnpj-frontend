@@ -23,10 +23,11 @@ export default function UserEdit(){
         setUser((state)=>{
             
             if(target.name === "admin"){
-                if(target.checked === true){
-                    return {...state,[target.name]:"true"}
-                }else{
-                    return {...state,[target.name]:"false"}
+                if(target.checked && target.id === "flexRadioDefault1"){
+                    return {...state,[target.name]: "false"}
+
+                }else if(target.checked && target.id === "flexRadioDefault2"){
+                    return {...state,[target.name]: "true"}
                 }
 
             }else{
@@ -68,13 +69,13 @@ export default function UserEdit(){
                     <input onChange={changeUser} className="form-control" type="email" name="email" value={user.email} />
                 </div>
                 <div className="form-check">
-                    <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault1" checked={user.admin==="true"?false:true}/>
+                    <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault1" />
                     <label className="form-check-label" for="flexRadioDefault1">
                         Usuário
                     </label>
                 </div>
                 <div className="form-check">
-                    <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault2" checked={user.admin==="true"?true:false}/>
+                    <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault2" />
                     <label className="form-check-label" for="flexRadioDefault2">
                         Administrador
                     </label>
