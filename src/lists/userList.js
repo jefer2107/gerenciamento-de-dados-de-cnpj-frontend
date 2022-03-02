@@ -1,10 +1,11 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Header from '../components/header'
 
 export default function UserList(){
     const [users, setUsers] = useState([])
+    const navigate = useNavigate()
     let {id} = useParams()
 
     useEffect(()=>{
@@ -34,6 +35,11 @@ export default function UserList(){
             })
     }
 
+    const editUser = (id)=>{
+        console.log("Fui chamado")
+        navigate(`/user-edit/${id}`)
+    }
+
     return(
         <>
         <Header />
@@ -60,7 +66,7 @@ export default function UserList(){
                                 <td> {x.email} </td>
                                 <td> {x.admin} </td>
                                 <td>
-                                    <button className="btn btn-primary">Editar</button>
+                                    <button onClick={()=> editUser(x.id)} className="btn btn-primary">Editar</button>
                                     <button onClick={()=> removeUser(x.id)} className="btn btn-danger">Remover</button>
                                 </td>
                             </tr>
