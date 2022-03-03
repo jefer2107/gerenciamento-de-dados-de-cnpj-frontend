@@ -8,7 +8,7 @@ export default function ClientList(){
     const [clients, setClients] = useState([])
 
     useEffect(()=>{
-        axios.get(`http://localhost:3001/clients/getAll`)
+        axios.get(`http://localhost:3001/list_clients/join/clients/idClient/users/idUser/getJoinClientsAndUsers`)
             .then((x)=>{
                 setClients(x.data)
             })
@@ -34,6 +34,7 @@ export default function ClientList(){
                         <td>NOME</td>
                         <td>NOME FANTASIA</td>
                         <td>STATUS</td>
+                        <td>USUÁRIO</td>
                         <td>AÇÕES</td>
                     </tr>
                 </thead>
@@ -46,6 +47,7 @@ export default function ClientList(){
                                 <td> {x.name} </td>
                                 <td> {x.fantasy} </td>
                                 <td> {x.status} </td>
+                                <td> {x.nameUser} </td>
                                 <td> 
                                     <button onClick={()=>moreDetails(x.id)} type="butto" className="btn btn-primary">Mais detalhes</button> 
                                     <button onClick={()=>moreDetails(x.id)} type="butto" className="btn btn-danger">Excluir</button>

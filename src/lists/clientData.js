@@ -49,7 +49,6 @@ export default function ClientData(){
 
             console.log('Filho renderizou')
 
-        
     },[id])
 
     return(
