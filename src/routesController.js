@@ -5,6 +5,7 @@ import ClientData from "./lists/clientData";
 import ClientList from "./lists/clientList";
 import MyClientsLists from "./lists/myClientsList";
 import UserList from "./lists/userList";
+import MyProfile from "./profiles/myProfile";
 import Search from "./registers/search";
 import UserRegister from "./registers/userRegister";
 
@@ -19,6 +20,7 @@ export default function RoutesController(){
                 <Route exact path="/user-register" element={<UserRegister/>} />
                 <Route exact path="/user-list" element={<UserList/>} />
                 <Route exact path="/user-edit/:id" element={<UserEdit/>} />
+                <Route exact path="/user-profile" element={<MyProfile/>} />
                 <Route exact path="/my-client-list" element={<MyClientsLists/>} />
                 <Route exact path="/" element={<Login/>} />
             </Routes>

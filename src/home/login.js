@@ -25,11 +25,14 @@ export default function Login(){
     }
 
     const loginUser = async (event)=>{
+        event.preventDefault()
+
         await sendUser()
 
-        //navigate("/search")
+        setTimeout(()=>{
+            navigate("/search")
+        },3000)
 
-        event.preventDefault()
     }
 
     return(
@@ -41,7 +44,7 @@ export default function Login(){
                 {JSON.stringify(user)}
                 <input onChange={changeUser} className="form-control" type='email' name='email' placeholder="Digite o email" />
                 <input onChange={changeUser} className="form-control" type='text' name='password' placeholder="Digite a senha" />
-                <button type='submit' className="btn btn-primary w-100">Cadastrar</button>
+                <button type='submit' className="btn btn-primary w-100">Logar</button>
             </form>
         </div>
         </>
