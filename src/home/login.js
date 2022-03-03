@@ -31,7 +31,7 @@ export default function Login(){
 
         setTimeout(()=>{
             navigate("/search")
-        },3000)
+        },5000)
 
     }
 

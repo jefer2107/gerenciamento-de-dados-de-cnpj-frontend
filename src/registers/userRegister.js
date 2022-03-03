@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Header from '../components/header'
 
 export default function UserRegister(){
-    const [user, setUser] = useState({name:'',email:'',admin:'',password:''})
+    const [user, setUser] = useState({nameUser:'',email:'',admin:'',password:''})
     const navigate = useNavigate()
 
     const changeUser = ({target})=>{

@@ -6,6 +6,7 @@ import jwtDecoded from "jwt-decode"
 
 export default function MyClientsLists(){
     const [clients, setClients] = useState([])
+    const [message, setMessage] = useState()
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
     const decoded = jwtDecoded(token !== null && token)
@@ -21,11 +22,16 @@ export default function MyClientsLists(){
         axios.get(`http://localhost:3001/list_clients/${decoded.id}/getOneJoinClientsAndUsers`)
             .then((x)=>{
                 setClients(x.data)
+                setMessage(()=>{
+                    if(clients.length === 0) return "Você ainda não tem clientes cadastrados!!!"
+                })
             })
             .catch((error)=>{
                 console.log(error)
             })
     },[])
+
+   
 
     return(
         <>
@@ -63,6 +69,9 @@ export default function MyClientsLists(){
                     })}
                 </tbody>
             </table>
+            <div className='text-center'>
+                <span className='text-danger'> {message} </span>
+            </div>
         </div>
         </>
     )

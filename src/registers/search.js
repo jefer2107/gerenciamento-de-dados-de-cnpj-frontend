@@ -9,6 +9,7 @@ export default function Search(){
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
     const decoded = jwtDecoded(token !== null && token)
+    const [message, setMessage] = useState("")
 
     const changeNumberCNPJ = ({target})=>{
         setNumberCNPJ(()=>{
@@ -16,8 +17,25 @@ export default function Search(){
         })
     }
 
-    const redirectToCnpj = ()=>{
-        navigate(`/client-data/${numberCNPJ.cnpj}`)
+    const validateCnpj = (cnpj)=>{
+        return new Promise((res,rej)=>{
+            if(!cnpj || cnpj === "") return rej("Precisa preencher o campo primeiro")
+
+            return res()
+        })
+        
+    }
+
+    const redirectToCnpj = (event)=>{
+        validateCnpj(numberCNPJ.cnpj).then(()=>{
+            navigate(`/client-data/${numberCNPJ.cnpj}`)
+
+        }).catch((error)=>{
+            setMessage(error)
+        })
+
+        event.preventDefault()
+        
     }
 
     return(
@@ -30,6 +48,9 @@ export default function Search(){
                 {JSON.stringify(decoded)}
                 <input onChange={changeNumberCNPJ} className="form-control" name="cnpj" />
                 <button type="submit" className="btn btn-primary">Enviar</button>
+                <div className="text-center">
+                    <span> {message} </span>
+                </div>
             </form>
         </div>
         </>
