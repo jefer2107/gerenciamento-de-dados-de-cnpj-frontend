@@ -5,6 +5,7 @@ import Header from '../components/header'
 
 export default function UserList(){
     const [users, setUsers] = useState([])
+    const [message, setMessage] = useState("")
     const navigate = useNavigate()
     let {id} = useParams()
 
@@ -12,28 +13,12 @@ export default function UserList(){
         axios.get(`http://localhost:3001/users/getAll`)
             .then((x)=>{
                 setUsers(x.data)
+                setMessage(x.data.length === 0 && "Lista vazia")
             })
             .catch((error)=>{
                 console.log(error)
             })
     },[id])
-
-    const removeUser = (id)=>{
-        axios.delete(`http://localhost:3001/users/${id}/removeItem`)
-            .then(()=>{
-                setUsers((state)=>{
-                    const newList = [...state]
-                    const itemToBeRemove = users.findIndex(e=> e.id == id)
-
-                    newList.splice(itemToBeRemove, 1)
-
-                    return newList
-                })
-            })
-            .catch((error)=>{
-                console.log(error)
-            })
-    }
 
     const editUser = (id)=>{
         console.log("Fui chamado")
@@ -67,13 +52,15 @@ export default function UserList(){
                                 <td> {x.admin} </td>
                                 <td>
                                     <button onClick={()=> editUser(x.id)} className="btn btn-primary">Editar</button>
-                                    <button onClick={()=> removeUser(x.id)} className="btn btn-danger">Remover</button>
                                 </td>
                             </tr>
                         )
                     })}
                 </tbody>
             </table>
+            <div className='text-center'>
+                <span className='text-danger'> {message} </span>
+            </div>
         </div>
         </>
     )

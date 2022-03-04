@@ -6,11 +6,13 @@ import Header from '../components/header'
 export default function ClientList(){
     const navigate = useNavigate()
     const [clients, setClients] = useState([])
+    const [message, setMessage] = useState("")
 
     useEffect(()=>{
         axios.get(`http://localhost:3001/clients/getJoinClientsAndUsers`)
             .then((x)=>{
                 setClients(x.data)
+                setMessage(x.data.length === 0 && "Lista vazia")
             })
             .catch((error)=>{
                 console.log(error)
@@ -59,6 +61,9 @@ export default function ClientList(){
                     })}
                 </tbody>
             </table>
+            <div className="text-center">
+                <span> {message} </span>
+            </div>
         </div>
         </>
     )

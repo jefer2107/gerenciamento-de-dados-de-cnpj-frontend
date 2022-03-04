@@ -8,7 +8,7 @@ export const validateUserRegister = (user=null)=>{
         
         if(!user.nameUser === "" || user.email === "" || user.password === "") return rej("Primeiro precisa preecher os campos")
 
-        if(user.email.length > 15) return rej("O email não pode ultrapassar de 15 caracteres")
+        if(user.email.length > 30) return rej("O email não pode ultrapassar de 30 caracteres")
 
         characters.forEach((x)=>{
             if(!user.email.includes(x)) return rej("Formato de email inválido")

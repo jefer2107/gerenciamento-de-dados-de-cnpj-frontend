@@ -31,9 +31,7 @@ export default function MyClientsLists(){
         axios.get(`http://localhost:3001/clients/${decoded.id}/getOneJoinClientAndUsers`)
             .then((x)=>{
                 setClients(x.data)
-                setMessage(()=>{
-                    if(x.data.length === 0) return "Você ainda não tem clientes cadastrados!!!"
-                })
+                setMessage(x.data.length === 0 && "Ainda não tem clientes cadastrados")
             })
             .catch((error)=>{
                 console.log(error)

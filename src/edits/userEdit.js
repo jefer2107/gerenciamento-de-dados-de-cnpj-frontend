@@ -2,12 +2,17 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Header from '../components/header'
+import jwtDecoded from "jwt-decode"
+import { validateUserRegister } from "../validation/validateUserRegister"
 
 
 export default function UserEdit(){
-    const [user, setUser] = useState({name:"", email:"", admin:""})
+    const [user, setUser] = useState({nameUser:"", email:"", admin:""})
+    const [message, setMessage] = useState("")
     const navigate = useNavigate()
     let {id} = useParams()
+    const token = localStorage.getItem('token')
+    const decoded = jwtDecoded(token !== null && token)
 
     useEffect(()=>{
         axios.get(`http://localhost:3001/users/${id}/getOne`)
@@ -37,16 +42,29 @@ export default function UserEdit(){
         })
     }
 
-    const saveUser = (event)=>{
-        axios.put(`http://localhost:3001/users/${id}/changeItem`,user)
-            .then(()=>{
-                navigate("/user-list")
-            })
-            .catch((error)=>{
-                console.log(error)
-            })
+    const sendUser = async ()=>{
+
+        try {
+            await axios.put(`http://localhost:3001/users/${id}/changeItem`,user)
+
+        } catch (error) {
+            setMessage(error)
+        }
+        
+    }
+
+    const saveUser = async (event)=>{
+
+        validateUserRegister(user).then(async()=>{
+            await sendUser()
+            navigate("/user-list")
+
+        }).catch((error)=>{
+            setMessage(error)
+        })
 
         event.preventDefault()
+
     }
 
     const cancelEdit = ()=>{
@@ -62,11 +80,16 @@ export default function UserEdit(){
                 {JSON.stringify(user)}
                 <div className="form-group">
                     <label>Nome:</label>
-                    <input onChange={changeUser} className="form-control" type="text" name="name" value={user.name} />
+                    {decoded.id !== id?<input className="form-control" type="text" name="nameUser" value={user.nameUser} />:
+                    <input onChange={changeUser} className="form-control" type="text" name="nameUser" value={user.nameUser} />
+                    }
+                    
                 </div>
                 <div className="form-group">
                     <label>Email:</label>
+                    {decoded.id !== id?<input className="form-control" type="email" name="email" value={user.email} />:
                     <input onChange={changeUser} className="form-control" type="email" name="email" value={user.email} />
+                    }
                 </div>
                 <div className="form-check">
                     <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault1" />
@@ -85,6 +108,9 @@ export default function UserEdit(){
                 </div>
                 <div className="py-2">
                     <button onClick={()=> cancelEdit()} type="button" className="tn btn-danger w-100 p-2">Cancelar</button>
+                </div>
+                <div className="text-center">
+                    <span> {message} </span>
                 </div>
             </form>
         </div>
