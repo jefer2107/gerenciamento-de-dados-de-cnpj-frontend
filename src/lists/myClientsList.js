@@ -28,7 +28,7 @@ export default function MyClientsLists(){
     }
 
     useEffect(()=>{
-        axios.get(`http://localhost:3001/list_clients/${decoded.id}/getOneJoinClientsAndUsers`)
+        axios.get(`http://localhost:3001/clients/${decoded.id}/getOneJoinClientAndUsers`)
             .then((x)=>{
                 setClients(x.data)
                 setMessage(()=>{
