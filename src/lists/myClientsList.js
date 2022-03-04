@@ -10,7 +10,11 @@ export default function MyClientsLists(){
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
     const decoded = jwtDecoded(token !== null && token)
+    const [menu, setMenu] = useState(false)
 
+    useEffect(()=>{
+        setMenu(decoded.admin==="true" && true)
+    },[])
 
     const moreDetails = (id)=>{
         navigate(`/client-data/${id}`)
@@ -42,7 +46,7 @@ export default function MyClientsLists(){
 
     return(
         <>
-        <Header />
+        <Header menu={menu}/>
         <div className="list container-fluid">
             <h3 className="text-center">Meus Clientes</h3>
             {JSON.stringify(clients)}

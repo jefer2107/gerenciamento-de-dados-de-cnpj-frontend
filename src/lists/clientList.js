@@ -2,11 +2,19 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Header from '../components/header'
+import jwtDecoded from "jwt-decode"
 
 export default function ClientList(){
     const navigate = useNavigate()
     const [clients, setClients] = useState([])
     const [message, setMessage] = useState("")
+    const token = localStorage.getItem('token')
+    const decoded = jwtDecoded(token !== null && token)
+    const [menu, setMenu] = useState(false)
+
+    useEffect(()=>{
+        setMenu(decoded.admin==="true" && true)
+    },[])
 
     useEffect(()=>{
         axios.get(`http://localhost:3001/clients/getJoinClientsAndUsers`)
@@ -27,7 +35,7 @@ export default function ClientList(){
 
     return(
         <>
-        <Header />
+        <Header menu={menu}/>
         <div className="list container-fluid">
             <h3 className="text-center">Lista de Clientes</h3>
             <table className="container text-center">

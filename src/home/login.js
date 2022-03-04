@@ -45,7 +45,6 @@ export default function Login(){
 
     return(
         <>
-        <Header/>
         <div className="form-style d-flex">
             <form onSubmit={loginUser} className="mx-auto">
                 <h3 className="text-center">Login</h3>

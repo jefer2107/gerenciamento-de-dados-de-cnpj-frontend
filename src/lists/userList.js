@@ -2,12 +2,16 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Header from '../components/header'
+import jwtDecoded from "jwt-decode"
 
 export default function UserList(){
     const [users, setUsers] = useState([])
     const [message, setMessage] = useState("")
+    const [menu, setMenu] = useState(false)
     const navigate = useNavigate()
     let {id} = useParams()
+    const token = localStorage.getItem('token')
+    const decoded = jwtDecoded(token !== null && token)
 
     useEffect(()=>{
         axios.get(`http://localhost:3001/users/getAll`)
@@ -20,6 +24,10 @@ export default function UserList(){
             })
     },[id])
 
+    useEffect(()=>{
+        setMenu(decoded.admin==="true" && true)
+    },[])
+
     const editUser = (id)=>{
         console.log("Fui chamado")
         navigate(`/user-edit/${id}`)
@@ -27,7 +35,7 @@ export default function UserList(){
 
     return(
         <>
-        <Header />
+        <Header menu={menu}/>
         <div className="list container-fluid">
             <h3 className="text-center">Lista de Usuários</h3>
             <table className='container'>

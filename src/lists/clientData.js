@@ -36,6 +36,11 @@ export default function ClientData(){
     let {id} = useParams()
     const token = localStorage.getItem('token')
     const decoded = jwtDecoded(token !== null && token)
+    const [menu, setMenu] = useState(false)
+
+    useEffect(()=>{
+        setMenu(decoded.admin==="true" && true)
+    },[])
 
     useEffect(()=>{
         console.log('id:',id)
@@ -53,7 +58,7 @@ export default function ClientData(){
 
     return(
         <>
-        <Header />
+        <Header menu={menu}/>
         <div className="list">
             {JSON.stringify(clients)}
             {JSON.stringify(decoded)}

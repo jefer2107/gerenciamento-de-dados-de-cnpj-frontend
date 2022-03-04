@@ -1,13 +1,21 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/header'
 import { validateUserRegister } from '../validation/validateUserRegister'
+import jwtDecoded from "jwt-decode"
 
 export default function UserRegister(){
     const [user, setUser] = useState({nameUser:'',email:'',admin:'',password:''})
     const [message, setMessage] = useState("")
     const navigate = useNavigate()
+    const token = localStorage.getItem('token')
+    const decoded = jwtDecoded(token !== null && token)
+    const [menu, setMenu] = useState(false)
+
+    useEffect(()=>{
+        setMenu(decoded.admin==="true" && true)
+    },[])
 
     const changeUser = ({target})=>{
         setUser((state)=>{
@@ -54,7 +62,7 @@ export default function UserRegister(){
 
     return(
         <>
-        <Header />
+        <Header menu={menu}/>
         <div className="form-style d-flex">
             <form onSubmit={registerUser} className="mx-auto">
                 <h3 className="text-center">Cadastro de usuários</h3>

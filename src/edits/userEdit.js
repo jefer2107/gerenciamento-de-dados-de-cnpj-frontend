@@ -13,6 +13,11 @@ export default function UserEdit(){
     let {id} = useParams()
     const token = localStorage.getItem('token')
     const decoded = jwtDecoded(token !== null && token)
+    const [menu, setMenu] = useState(false)
+
+    useEffect(()=>{
+        setMenu(decoded.admin==="true" && true)
+    },[])
 
     useEffect(()=>{
         axios.get(`http://localhost:3001/users/${id}/getOne`)
@@ -73,7 +78,7 @@ export default function UserEdit(){
 
     return(
         <>
-        <Header />
+        <Header menu={menu}/>
         <div className="d-flex form-style">
             <form onSubmit={saveUser} className="mx-auto">
                 <h3 className="text-center">Editar Usuário</h3>

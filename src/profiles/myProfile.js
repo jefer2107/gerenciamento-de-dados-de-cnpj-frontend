@@ -10,12 +10,17 @@ export default function MyProfile(){
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
     const decoded = jwtDecoded(token !== null && token)
+    const [menu, setMenu] = useState(false)
 
     const changeUser = ({target})=>{
         setUser((state)=>{
             return {...state,[target.name]: target.value}
         })
     }
+
+    useEffect(()=>{
+        setMenu(decoded.admin==="true" && true)
+    },[])
 
     useEffect(()=>{
         axios.get(`http://localhost:3001/users/${decoded.id}/getOne`)
@@ -51,19 +56,19 @@ export default function MyProfile(){
 
     return(
         <>
-        <Header />
+        <Header menu={menu}/>
         <div className="d-flex form-style">
-            <form onSubmit={btnEdit===true?saveUser:false} className="mx-auto">
+            <form onSubmit={btnEdit===true?saveUser:undefined} className="mx-auto">
                 <h3 className="text-center">{btnEdit===true?"Editar Perfil":"Meu perfil"}</h3>
                 {JSON.stringify(user)}
                 {JSON.stringify(btnEdit)}
                 <div className="form-group">
                     <label>Nome:</label>
-                    <input onChange={btnEdit===true?changeUser:false} className="form-control" type="text" name="nameUser" value={user.nameUser} />
+                    <input onChange={btnEdit===true?changeUser:undefined} className="form-control" type="text" name="nameUser" value={user.nameUser} />
                 </div>
                 <div className="form-group">
                     <label>Email:</label>
-                    <input onChange={btnEdit===true?changeUser:false} className="form-control" type="email" name="email" value={user.email} />
+                    <input onChange={btnEdit===true?changeUser:undefined} className="form-control" type="email" name="email" value={user.email} />
                 </div>
                 <div className="form-group">
                     <label>Sou:</label>

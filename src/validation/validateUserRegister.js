@@ -1,9 +1,10 @@
+import axios from "axios"
 
 
-export const validateUserRegister = (user=null)=>{
+export const validateUserRegister = async (user=null)=>{
     console.log('validateUser:',user)
 
-    return new Promise((res,rej)=>{
+    return new Promise(async(res,rej)=>{
         let characters = ["@",".","com"]
         
         if(!user.nameUser === "" || user.email === "" || user.password === "") return rej("Primeiro precisa preecher os campos")
@@ -14,6 +15,17 @@ export const validateUserRegister = (user=null)=>{
             if(!user.email.includes(x)) return rej("Formato de email inválido")
 
         })
+
+        try {
+            const {data} = await axios.get(`http://localhost:3001/users/getAll`)
+
+            const newData = data.filter(e=> e.email === user.email)
+
+            if(user.email === newData[0].email) return rej("Já existe um cadastro com este email")
+
+        } catch (error) {
+            return rej("Um erro crítico ocorreu!")
+        }
 
         if(user.password.length > 6) return rej("A senha não pode ultrapassar de 6 caracteres")
 

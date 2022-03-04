@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Header from '../components/header'
 import jwtDecoded from "jwt-decode"
@@ -10,12 +10,17 @@ export default function Search(){
     const token = localStorage.getItem('token')
     const decoded = jwtDecoded(token !== null && token)
     const [message, setMessage] = useState("")
+    const [menu, setMenu] = useState(false)
 
     const changeNumberCNPJ = ({target})=>{
         setNumberCNPJ(()=>{
             return {[target.name]: target.value}
         })
     }
+
+    useEffect(()=>{
+        setMenu(decoded.admin==="true" && true)
+    },[])
 
     const validateCnpj = (cnpj)=>{
         return new Promise((res,rej)=>{
@@ -40,7 +45,7 @@ export default function Search(){
 
     return(
         <>
-        <Header />
+        <Header menu={menu}/>
         <div className="form-style">
             <form onSubmit={redirectToCnpj} className="mx-auto">
                 <h3 className="text-center">Consultar CNPJ</h3>
