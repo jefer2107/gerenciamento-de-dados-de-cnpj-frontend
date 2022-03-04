@@ -16,14 +16,23 @@ export default function MyClientsLists(){
         navigate(`/client-data/${id}`)
     }
 
-    const removeUser = ()=>{}
+    const removeClient = (id)=>{
+        setClients((state)=>{
+            const newClients = [...state]
+            const itemToBeRemove = clients.findIndex(e=> e.id === id)
+
+            newClients.splice(itemToBeRemove, 1)
+
+            return newClients
+        })
+    }
 
     useEffect(()=>{
         axios.get(`http://localhost:3001/list_clients/${decoded.id}/getOneJoinClientsAndUsers`)
             .then((x)=>{
                 setClients(x.data)
                 setMessage(()=>{
-                    if(clients.length === 0) return "Você ainda não tem clientes cadastrados!!!"
+                    if(x.data.length === 0) return "Você ainda não tem clientes cadastrados!!!"
                 })
             })
             .catch((error)=>{
@@ -38,6 +47,7 @@ export default function MyClientsLists(){
         <Header />
         <div className="list container-fluid">
             <h3 className="text-center">Meus Clientes</h3>
+            {JSON.stringify(clients)}
             <table className="container text-center">
                 <thead>
                     <tr>
@@ -53,7 +63,7 @@ export default function MyClientsLists(){
                 <tbody>
                     {clients.length !== 0 && clients.map((x)=>{
                         return(
-                            <tr>
+                            <tr key={x.id}>
                                 <td> {x.id} </td>
                                 <td> {x.date} </td>
                                 <td> {x.name} </td>
@@ -62,7 +72,7 @@ export default function MyClientsLists(){
                                 <td> {x.nameUser} </td>
                                 <td> 
                                     <button onClick={()=>moreDetails(x.id)} type="butto" className="btn btn-primary">Mais detalhes</button> 
-                                    <button onClick={()=>removeUser(x.id)} type="butto" className="btn btn-danger">Excluir</button>
+                                    <button onClick={()=>removeClient(x.id)} type="butto" className="btn btn-danger">Excluir</button>
                                 </td>
                             </tr>
                         )

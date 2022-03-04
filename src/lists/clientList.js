@@ -8,7 +8,7 @@ export default function ClientList(){
     const [clients, setClients] = useState([])
 
     useEffect(()=>{
-        axios.get(`http://localhost:3001/list_clients/join/clients/idClient/users/idUser/getJoinClientsAndUsers`)
+        axios.get(`http://localhost:3001/clients/getJoinClientsAndUsers`)
             .then((x)=>{
                 setClients(x.data)
             })
