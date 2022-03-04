@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Header from '../components/header'
 import jwtDecoded from "jwt-decode"
 import axios from 'axios'
+import { validateMyProfile } from '../validation/validateMyProfile'
 
 export default function MyProfile(){
     const [user, setUser] = useState({nameUser:"",email:""})
@@ -11,6 +12,7 @@ export default function MyProfile(){
     const token = localStorage.getItem('token')
     const decoded = jwtDecoded(token !== null && token)
     const [menu, setMenu] = useState(false)
+    const [message, setMessage] = useState("")
 
     const changeUser = ({target})=>{
         setUser((state)=>{
@@ -32,17 +34,30 @@ export default function MyProfile(){
             })
     },[])
 
+    const sendUser = async ()=>{
+
+        try {
+            await axios.put(`http://localhost:3001/users/${decoded.id}/changeItem`,user)
+
+        } catch (error) {
+            setMessage(error)
+
+        }
+    }
+
     const saveUser = (event)=>{
+        
+        validateMyProfile(user,decoded.id).then(async()=>{
+            await sendUser()
+            setBtnEdit(false)
+            
+        }).catch((error)=>{
+            setMessage(error)
+        })
+
+        setMessage("")
+
         event.preventDefault()
-        axios.put(`http://localhost:3001/users/${decoded.id}/changeItem`,user)
-            .then(()=>{
-                navigate("/user-profile")
-                setBtnEdit(false)
-            })
-            .catch((error)=>{
-                console.log(error)
-                navigate("/user-profile")
-            })
 
     }
 
@@ -64,15 +79,15 @@ export default function MyProfile(){
                 {JSON.stringify(btnEdit)}
                 <div className="form-group">
                     <label>Nome:</label>
-                    <input onChange={btnEdit===true?changeUser:undefined} className="form-control" type="text" name="nameUser" value={user.nameUser} />
+                    <input onChange={btnEdit===true?changeUser:undefined} disabled={!btnEdit} className="form-control" type="text" name="nameUser" value={user.nameUser} />
                 </div>
                 <div className="form-group">
                     <label>Email:</label>
-                    <input onChange={btnEdit===true?changeUser:undefined} className="form-control" type="email" name="email" value={user.email} />
+                    <input onChange={btnEdit===true?changeUser:undefined} disabled={!btnEdit} className="form-control" type="email" name="email" value={user.email} />
                 </div>
                 <div className="form-group">
                     <label>Sou:</label>
-                    <input className="form-control" type="text" value={user.admin==="true"?"Administrador":"Usuário"} />
+                    <input className="form-control" disabled={!btnEdit} type="text" value={user.admin==="true"?"Administrador":"Usuário"} />
                 </div>
                 {btnEdit === true?
                 <>
@@ -88,6 +103,9 @@ export default function MyProfile(){
                     <button type='button' onClick={()=> editUser()} className='btn btn-primary w-100'>Editar Perfil</button>
                 </div>
                 }
+                <div className="text-center">
+                    <span> {message} </span>
+                </div>
             </form>
         </div>
         </>

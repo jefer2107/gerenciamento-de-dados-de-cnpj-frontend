@@ -44,7 +44,7 @@ export default function ClientData(){
 
     useEffect(()=>{
         console.log('id:',id)
-        axios.get(`http://localhost:3001/clients/${id}/${decoded.id}/getOne`)
+        axios.get(`http://localhost:3001/clients/${id}/${decoded.id}/getOne`,{header:{'Authorization':`Bearer ${token}`}})
             .then((x)=>{
                 setClients(()=>x.data)
             })

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import Header from '../components/header'
 import jwtDecoded from "jwt-decode"
 import { validateUserRegister } from "../validation/validateUserRegister"
+import { validateUserEdit } from "../validation/validateUserEdit"
 
 
 export default function UserEdit(){
@@ -60,7 +61,7 @@ export default function UserEdit(){
 
     const saveUser = async (event)=>{
 
-        validateUserRegister(user).then(async()=>{
+        validateUserEdit(user).then(async()=>{
             await sendUser()
             navigate("/user-list")
 
@@ -82,7 +83,7 @@ export default function UserEdit(){
         <div className="d-flex form-style">
             <form onSubmit={saveUser} className="mx-auto">
                 <h3 className="text-center">Editar Usuário</h3>
-                {JSON.stringify(user)}
+                {JSON.stringify(decoded)}
                 <div className="form-group">
                     <label>Nome:</label>
                     {decoded.id !== id?<input className="form-control" type="text" name="nameUser" value={user.nameUser} />:

@@ -17,7 +17,7 @@ export default function ClientList(){
     },[])
 
     useEffect(()=>{
-        axios.get(`http://localhost:3001/clients/getJoinClientsAndUsers`)
+        axios.get(`http://localhost:3001/clients/getJoinClientsAndUsers`,{header:{'Authorization':`Bearer ${token}`}})
             .then((x)=>{
                 setClients(x.data)
                 setMessage(x.data.length === 0 && "Lista vazia")
@@ -38,6 +38,7 @@ export default function ClientList(){
         <Header menu={menu}/>
         <div className="list container-fluid">
             <h3 className="text-center">Lista de Clientes</h3>
+            {JSON.stringify(token)}
             <table className="container text-center">
                 <thead>
                     <tr>
