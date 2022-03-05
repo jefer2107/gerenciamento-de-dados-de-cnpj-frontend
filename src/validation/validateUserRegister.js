@@ -19,15 +19,15 @@ export const validateUserRegister = async (user=null)=>{
         try {
             const {data} = await axios.get(`http://localhost:3001/users/getAll`)
 
-            const newData = data.filter(e=> e.email === user.email)
+            const newData = data.length !== 0? data.filter(e=> e.email === user.email): null
 
-            if(user.email === newData[0].email) return rej("Já existe um cadastro com este email")
+            if(user.email === newData[0]?.email) return rej("Já existe um cadastro com este email")
 
         } catch (error) {
             return rej("Um erro crítico ocorreu!")
         }
 
-        if(user.password.length > 6) return rej("A senha não pode ultrapassar de 6 caracteres")
+        if(user.password.length !== 6) return rej("A senha deve ter 6 caracteres")
 
         return res()
     })

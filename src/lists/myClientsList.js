@@ -21,14 +21,22 @@ export default function MyClientsLists(){
     }
 
     const removeClient = (id)=>{
-        setClients((state)=>{
-            const newClients = [...state]
-            const itemToBeRemove = clients.findIndex(e=> e.id === id)
-
-            newClients.splice(itemToBeRemove, 1)
-
-            return newClients
-        })
+        axios.delete(`http://localhost:3001/clients/${id}/removeItem`)
+            .then(()=>{
+                setMessage("Removido")
+                // setClients((state)=>{
+                //     const newClients = [...state]
+                //     const itemToBeRemove = clients.findIndex(e=> e.id === id)
+        
+                //     newClients.splice(itemToBeRemove, 1)
+        
+                //     return newClients
+                // })
+            })
+            .catch((error)=>{
+                setMessage(error)
+            })
+        
     }
 
     useEffect(()=>{
@@ -73,8 +81,8 @@ export default function MyClientsLists(){
                                 <td> {x.status} </td>
                                 <td> {x.nameUser} </td>
                                 <td> 
-                                    <button onClick={()=>moreDetails(x.id)} type="butto" className="btn btn-primary">Mais detalhes</button> 
-                                    <button onClick={()=>removeClient(x.id)} type="butto" className="btn btn-danger">Excluir</button>
+                                    <button onClick={()=>moreDetails(x.id)} type="button" className="btn btn-primary">Mais detalhes</button> 
+                                    <button onClick={()=>removeClient(x.id)} type="button" className="btn btn-danger">Excluir</button>
                                 </td>
                             </tr>
                         )

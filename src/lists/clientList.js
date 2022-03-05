@@ -11,16 +11,26 @@ export default function ClientList(){
     const token = localStorage.getItem('token')
     const decoded = jwtDecoded(token !== null && token)
     const [menu, setMenu] = useState(false)
+    const [checkedUpdate, setCheckedUpdate] = useState(false)
 
     useEffect(()=>{
         setMenu(decoded.admin==="true" && true)
     },[])
 
+    // useEffect(async()=>{},[])
+
+    // const verifyUpdate = async (newData)=>{
+    //     console.log("newData:",newData)
+    //     setClients(newData)
+    // }
+
     useEffect(()=>{
-        axios.get(`http://localhost:3001/clients/getJoinClientsAndUsers`,{header:{'Authorization':`Bearer ${token}`}})
+        console.log("Filho renderizou")
+        axios.get(`http://localhost:3001/clients/getJoinClientsAndUsers`,{headers:{'Authorization':`Bearer ${token}`}})
             .then((x)=>{
                 setClients(x.data)
                 setMessage(x.data.length === 0 && "Lista vazia")
+                
             })
             .catch((error)=>{
                 console.log(error)
@@ -31,14 +41,12 @@ export default function ClientList(){
         navigate(`/client-data/${id}`)
     }
 
-    const removeClient = ()=>{}
-
     return(
         <>
         <Header menu={menu}/>
         <div className="list container-fluid">
             <h3 className="text-center">Lista de Clientes</h3>
-            {JSON.stringify(token)}
+            {JSON.stringify(clients)}
             <table className="container text-center">
                 <thead>
                     <tr>
@@ -63,7 +71,6 @@ export default function ClientList(){
                                 <td> {x.nameUser} </td>
                                 <td> 
                                     <button onClick={()=>moreDetails(x.id)} type="butto" className="btn btn-primary">Mais detalhes</button> 
-                                    <button onClick={()=>removeClient(x.id)} type="butto" className="btn btn-danger">Excluir</button>
                                 </td>
                             </tr>
                         )

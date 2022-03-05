@@ -57,7 +57,7 @@ export default function UserList(){
                                 <td> {x.date} </td>
                                 <td> {x.nameUser} </td>
                                 <td> {x.email} </td>
-                                <td> {x.admin} </td>
+                                <td> {x.admin === "true"? "Sim": "Não"} </td>
                                 <td>
                                     <button onClick={()=> editUser(x.id)} className="btn btn-primary">Editar</button>
                                 </td>
