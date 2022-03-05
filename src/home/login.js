@@ -36,7 +36,7 @@ export default function Login(){
             setMessage("Aguarde...")
 
             setTimeout(()=>{
-                navigate("/search")
+                navigate("/my-client-list")
             },7000)
         }).catch((error)=>{
             setMessage(error)

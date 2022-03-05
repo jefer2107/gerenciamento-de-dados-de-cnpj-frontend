@@ -6,7 +6,6 @@ import ClientList from "./lists/clientList";
 import MyClientsLists from "./lists/myClientsList";
 import UserList from "./lists/userList";
 import MyProfile from "./profiles/myProfile";
-import Search from "./registers/search";
 import UserRegister from "./registers/userRegister";
 
 
@@ -14,7 +13,6 @@ export default function RoutesController(){
     return(
         <BrowserRouter>
             <Routes>
-                <Route exact path="/search" element={<Search/>} />
                 <Route exact path="/client-list" element={<ClientList/>} />
                 <Route exact path="/client-data/:id" element={<ClientData/>} />
                 <Route exact path="/user-register" element={<UserRegister/>} />
