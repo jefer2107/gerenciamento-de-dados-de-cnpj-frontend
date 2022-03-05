@@ -86,16 +86,15 @@ export default function UserEdit(){
                 {JSON.stringify(decoded)}
                 <div className="form-group">
                     <label>Nome:</label>
-                    {decoded.id !== id?<input className="form-control" type="text" name="nameUser" value={user.nameUser} />:
-                    <input onChange={changeUser} className="form-control" type="text" name="nameUser" value={user.nameUser} />
-                    }
-                    
+                    <input disabled className="form-control" type="text" name="nameUser" value={user.nameUser} />
                 </div>
                 <div className="form-group">
                     <label>Email:</label>
-                    {decoded.id !== id?<input className="form-control" type="email" name="email" value={user.email} />:
-                    <input onChange={changeUser} className="form-control" type="email" name="email" value={user.email} />
-                    }
+                    <input disabled className="form-control" type="email" name="email" value={user.email} />
+                </div>
+                <div className="form-group">
+                    <label>Adimistrador:</label>
+                    <input disabled className="form-control" type="email" name="email" value={user.admin === "true"? "Sim": "Não"} />
                 </div>
                 <div className="form-check">
                     <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault1" />

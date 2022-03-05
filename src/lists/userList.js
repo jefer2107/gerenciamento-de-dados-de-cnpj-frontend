@@ -14,7 +14,7 @@ export default function UserList(){
     const decoded = jwtDecoded(token !== null && token)
 
     useEffect(()=>{
-        axios.get(`http://localhost:3001/users/getAll`)
+        axios.get(`http://localhost:3001/users/getAll`,{headers:{'Authorization':`Bearer ${token}`}})
             .then((x)=>{
                 setUsers(x.data)
                 setMessage(x.data.length === 0 && "Lista vazia")

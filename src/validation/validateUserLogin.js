@@ -13,14 +13,14 @@ export const validateUserLogin = async (user)=>{
 
         })
 
-        if(user.password.length > 30) return rej("A senha não pode ultrapassar de 6 caracteres")
+        if(user.password.length !== 6) return rej("A senha deve ter 6 caracteres")
 
         try {
-            const {data} = await axios.get(`http://localhost:3001/users/getAll`)
+            const {data} = await axios.get(`http://localhost:3001/users/getAllunauthenticated`)
 
-            const newData = data.filter(e=> e.email === user.email)
+            const newData = data.length !== 0? data.filter(e=> e.email === user.email): null
 
-            if(newData.length === 0 || user.email !== newData[0].email || user.password !== newData[0].password) return rej("Usuário não cadastrado")
+            if(newData.length === null || user.email !== newData[0]?.email || user.password !== newData[0]?.password) return rej("Usuário não cadastrado")
 
         } catch (error) {
             return rej("Um erro crítico ocorreu!")

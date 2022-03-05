@@ -87,7 +87,7 @@ export default function MyProfile(){
                 </div>
                 <div className="form-group">
                     <label>Sou:</label>
-                    <input className="form-control" disabled={!btnEdit} type="text" value={user.admin==="true"?"Administrador":"Usuário"} />
+                    <input className="form-control" disabled type="text" value={user.admin==="true"?"Administrador":"Usuário"} />
                 </div>
                 {btnEdit === true?
                 <>

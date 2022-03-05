@@ -6,7 +6,7 @@ import { validateUserLogin } from '../validation/validateUserLogin'
 
 export default function Login(){
     const [user, setUser] = useState({email:"",password:""})
-    const [message, setMessage] = useState("")
+    const [message, setMessage] = useState("Mensagem")
     const navigate = useNavigate()
 
     const changeUser = ({target})=>{
@@ -47,12 +47,16 @@ export default function Login(){
         <>
         <div className="form-style d-flex">
             <form onSubmit={loginUser} className="mx-auto">
-                <h3 className="text-center">Login</h3>
-                {JSON.stringify(user)}
-                <input onChange={changeUser} className="form-control" type='text' name='email' placeholder="Digite o email" />
-                <input onChange={changeUser} className="form-control" type='text' name='password' placeholder="Digite a senha" />
-                <button type='submit' className="btn btn-primary w-100">Logar</button>
-                <div className="text-center">
+                <div className="mb-3">
+                    <label for="exampleInputEmail1" className="form-label">Email</label>
+                    <input onChange={changeUser} className="form-control" type='text' name='email'/>
+                </div>
+                <div className="mb-3">
+                    <label for="exampleInputPassword1" className="form-label">Senha</label>
+                    <input onChange={changeUser} className="form-control" type='text' name='password' />
+                </div>
+                <button type="submit" className="btn btn-primary w-100">Logar</button>
+                <div className="text-center text-danger">
                     <span> {message} </span>
                 </div>
             </form>

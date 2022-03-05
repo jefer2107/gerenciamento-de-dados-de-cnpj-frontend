@@ -23,8 +23,11 @@ export default function Search(){
     },[])
 
     const validateCnpj = (cnpj)=>{
+        const characters = [".","/"]
         return new Promise((res,rej)=>{
             if(!cnpj || cnpj === "") return rej("Precisa preencher o campo primeiro")
+
+            characters.forEach((x)=>{if(cnpj.includes(x)) return rej("O cnpj não pode conter caracteres")})
 
             return res()
         })

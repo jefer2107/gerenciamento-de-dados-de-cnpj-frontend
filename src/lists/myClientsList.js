@@ -40,7 +40,7 @@ export default function MyClientsLists(){
     }
 
     useEffect(()=>{
-        axios.get(`http://localhost:3001/clients/${decoded.id}/getOneJoinClientAndUsers`)
+        axios.get(`http://localhost:3001/clients/${decoded.id}/getOneJoinClientAndUsers`,{headers:{'Authorization':`Bearer ${token}`}})
             .then((x)=>{
                 setClients(x.data)
                 setMessage(x.data.length === 0 && "Ainda não tem clientes cadastrados")
