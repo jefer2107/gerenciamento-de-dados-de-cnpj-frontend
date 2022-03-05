@@ -52,7 +52,7 @@ export default function Search(){
         <div className="form-style">
             <form onSubmit={redirectToCnpj} className="mx-auto">
                 <h3 className="text-center">Consultar CNPJ</h3>
-                <h4 className="text-center"> Olá, {decoded.name} </h4>
+                <h4 className="text-center"> Olá, {decoded.nameUser} </h4>
                 {JSON.stringify(decoded)}
                 <input onChange={changeNumberCNPJ} className="form-control" name="cnpj" />
                 <button type="submit" className="btn btn-primary">Enviar</button>

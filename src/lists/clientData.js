@@ -59,7 +59,7 @@ export default function ClientData(){
     return(
         <>
         <Header menu={menu}/>
-        <div className="list">
+        <div className="list container-fluid">
             {JSON.stringify(clients)}
             {JSON.stringify(decoded)}
             {clients.id === ""? <h3 className="text-center">Não foi encontrado dados com este CNPJ</h3>:
