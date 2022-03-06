@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Header from '../components/header'
 import jwtDecoded from "jwt-decode"
+import moment from 'moment'
 
 export default function UserList(){
     const [users, setUsers] = useState([])
@@ -29,16 +30,15 @@ export default function UserList(){
     },[])
 
     const editUser = (id)=>{
-        console.log("Fui chamado")
         navigate(`/user-edit/${id}`)
     }
 
     return(
         <>
         <Header menu={menu}/>
-        <div className="list container-fluid">
+        <div className="list client-list container-fluid my-4">
             <h3 className="text-center">Lista de Usuários</h3>
-            <table className='container'>
+            {/* <table className='container'>
                 <thead>
                     <tr>
                         <td>ID</td>
@@ -65,7 +65,27 @@ export default function UserList(){
                         )
                     })}
                 </tbody>
-            </table>
+            </table> */}
+            <div className="row my-4 justify-content-center">
+                {users.length !== 0 && users.map((x)=>{
+                    return(
+                        <div class="card text-center col-lg-4 col-sm-6 m-1 my-2">
+                            <div class="card-header">
+                                {x.id}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"> {x.nameUser} </h5>
+                                <p class="card-text"> - Email: {x.email} </p>
+                                <p class="card-text"> - Admin: {x.admin==="true"?"Sim":"Não"} </p>
+                                <button type="button" onClick={()=>editUser(x.id)} class="btn btn-primary">Editar</button>
+                            </div>
+                            <div class="card-footer text-muted">
+                                {moment(x.date).format("DD/MM/YYYY")}
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
             <div className='text-center'>
                 <span className='text-danger'> {message} </span>
             </div>
