@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import Header from '../components/header'
 import jwtDecoded from "jwt-decode"
+import moment from 'moment'
 
 export default function MyClientsLists(){
     const [clients, setClients] = useState([])
@@ -53,39 +54,36 @@ export default function MyClientsLists(){
     return(
         <>
         <Header menu={menu}/>
-        <div className="list container-fluid">
+        <div className="list client-list my-4 container-fluid">
             <h3 className="text-center">Meus Clientes</h3>
-            <table className="container text-center">
-                <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>DATA</td>
-                        <td>NOME</td>
-                        <td>NOME FANTASIA</td>
-                        <td>STATUS</td>
-                        <td>USUÁRIO</td>
-                        <td>AÇÕES</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {clients.length !== 0 && clients.map((x)=>{
-                        return(
-                            <tr key={x.id}>
-                                <td> {x.id} </td>
-                                <td> {x.date} </td>
-                                <td> {x.name} </td>
-                                <td> {x.fantasy} </td>
-                                <td> {x.status} </td>
-                                <td> {x.nameUser} </td>
-                                <td> 
-                                    <button onClick={()=>moreDetails(x.id)} type="button" className="btn btn-primary">Mais detalhes</button> 
+            <div className="row my-4 justify-content-center">
+                {clients.length !== 0 && clients.map((x)=>{
+                    return(
+                        <div class="card text-center col-lg-4 col-sm-6 m-1 my-2">
+                            <div class="card-header">
+                                {x.id}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"> {x.fantasy} </h5>
+                                <p class="card-text"> - Nome: {x.name} </p>
+                                <p class="card-text"> - Status: {x.status} </p>
+                                <p class="card-text"> - Usuário: {x.nameUser} </p>
+                                <p>
+                                    <button type="button" onClick={()=>moreDetails(x.id)} class="btn btn-primary">Mais detalhes</button>
+                                </p>
+                                <p>
                                     <button onClick={()=>removeClient(x.id)} type="button" className="btn btn-danger">Excluir</button>
-                                </td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+                                </p>
+                                
+                                
+                            </div>
+                            <div class="card-footer text-muted">
+                                {moment(x.date).format("DD/MM/YYYY")}
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
             <div className='text-center'>
                 <span className='text-danger'> {message} </span>
             </div>

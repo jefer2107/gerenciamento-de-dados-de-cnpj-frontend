@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Header from '../components/header'
 import jwtDecoded from "jwt-decode"
+import moment from "moment"
 
 export default function ClientList(){
     const navigate = useNavigate()
@@ -36,39 +37,8 @@ export default function ClientList(){
     return(
         <>
         <Header menu={menu}/>
-        <div className="list client-list container-fluid">
+        <div className="list client-list container-fluid my-4">
             <h3 className="text-center">Lista de Clientes</h3>
-            
-            {/* <table className="container text-center">
-                <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>DATA</td>
-                        <td>NOME</td>
-                        <td>NOME FANTASIA</td>
-                        <td>STATUS</td>
-                        <td>USUÁRIO</td>
-                        <td>AÇÕES</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {clients.length !== 0 && clients.map((x)=>{
-                        return(
-                            <tr>
-                                <td> {x.id} </td>
-                                <td> {x.date} </td>
-                                <td> {x.name} </td>
-                                <td> {x.fantasy} </td>
-                                <td> {x.status} </td>
-                                <td> {x.nameUser} </td>
-                                <td> 
-                                    <button onClick={()=>moreDetails(x.id)} type="butto" className="btn btn-primary">Mais detalhes</button> 
-                                </td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table> */}
             <div className="row my-4 justify-content-center">
                 {clients.length !== 0 && clients.map((x)=>{
                     return(
@@ -80,18 +50,16 @@ export default function ClientList(){
                                 <h5 class="card-title"> {x.fantasy} </h5>
                                 <p class="card-text"> - Nome: {x.name} </p>
                                 <p class="card-text"> - Status: {x.status} </p>
-                                <p class="card-text"> - Usuário: {x.user} </p>
+                                <p class="card-text"> - Usuário: {x.nameUser} </p>
                                 <button type="button" onClick={()=>moreDetails(x.id)} class="btn btn-primary">Mais detalhes</button>
                             </div>
                             <div class="card-footer text-muted">
-                                2 days ago
+                                {moment(x.date).format("DD/MM/YYYY")}
                             </div>
                         </div>
                     )
                 })}
             </div>
-            
-            
             <div className="text-center">
                 <span> {message} </span>
             </div>

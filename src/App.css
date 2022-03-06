@@ -2,7 +2,8 @@
   background-color: beige;
   padding: 15%;
   height: 100%;
-  margin: auto;
+  width: 100%;
+  min-width: 420px;
 }
 
 
@@ -27,7 +28,13 @@
 }
 
 .list.client-list .card{
-  max-width: 29%;
+  max-width: 300px;
+}
+
+@media(max-width:560px){
+  .list.client-data .card{
+    font-size: 13px;
+  }
 }
 
 .form-style{

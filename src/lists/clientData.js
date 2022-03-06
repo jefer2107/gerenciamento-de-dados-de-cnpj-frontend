@@ -60,7 +60,7 @@ export default function ClientData(){
     return(
         <>
         <Header menu={menu}/>
-        <div className="list container-fluid">
+        <div className="list client-data container-fluid my-4">
             {clients.id === ""? <h3 className="text-center">Não foi encontrado dados com este CNPJ</h3>:
             <>
                 <h3 className="text-center"> {clients.name !== "" && clients.name} </h3>
@@ -201,7 +201,7 @@ export default function ClientData(){
                 </div>
                 <h3 className="text-center my-4">Atividades Secundárias</h3>
                 <table className="container">
-                    <thead className="text-center m-2">
+                    <thead className="text-center">
                         <tr>
                             <td>DESCRIÇÃO</td>
                         </tr>
