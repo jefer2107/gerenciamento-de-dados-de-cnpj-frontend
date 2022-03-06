@@ -5,6 +5,7 @@
   margin: auto;
 }
 
+
 /* .list table{
   border: 1px solid black;
 } */
@@ -23,6 +24,10 @@
 
 .list table tbody{
   background-color: #fff;
+}
+
+.list.client-list .card{
+  max-width: 29%;
 }
 
 .form-style{

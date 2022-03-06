@@ -38,7 +38,6 @@ export default function Header({menu=false}){
             setTimeout(()=>{
                 navigate(`/client-data/${numberCNPJ.cnpj}`)
                 setBtn(true)
-                
             },3000)
 
         }).catch((error)=>{

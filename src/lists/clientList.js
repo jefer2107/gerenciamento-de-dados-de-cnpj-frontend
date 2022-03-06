@@ -11,18 +11,10 @@ export default function ClientList(){
     const token = localStorage.getItem('token')
     const decoded = jwtDecoded(token !== null && token)
     const [menu, setMenu] = useState(false)
-    const [checkedUpdate, setCheckedUpdate] = useState(false)
 
     useEffect(()=>{
         setMenu(decoded.admin==="true" && true)
     },[])
-
-    // useEffect(async()=>{},[])
-
-    // const verifyUpdate = async (newData)=>{
-    //     console.log("newData:",newData)
-    //     setClients(newData)
-    // }
 
     useEffect(()=>{
         console.log("Filho renderizou")
@@ -44,10 +36,10 @@ export default function ClientList(){
     return(
         <>
         <Header menu={menu}/>
-        <div className="list container-fluid">
+        <div className="list client-list container-fluid">
             <h3 className="text-center">Lista de Clientes</h3>
-            {JSON.stringify(clients)}
-            <table className="container text-center">
+            
+            {/* <table className="container text-center">
                 <thead>
                     <tr>
                         <td>ID</td>
@@ -76,7 +68,30 @@ export default function ClientList(){
                         )
                     })}
                 </tbody>
-            </table>
+            </table> */}
+            <div className="row my-4 justify-content-center">
+                {clients.length !== 0 && clients.map((x)=>{
+                    return(
+                        <div class="card text-center col-lg-4 col-sm-6 m-1 my-2">
+                            <div class="card-header">
+                                {x.id}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"> {x.fantasy} </h5>
+                                <p class="card-text"> - Nome: {x.name} </p>
+                                <p class="card-text"> - Status: {x.status} </p>
+                                <p class="card-text"> - Usuário: {x.user} </p>
+                                <button type="button" onClick={()=>moreDetails(x.id)} class="btn btn-primary">Mais detalhes</button>
+                            </div>
+                            <div class="card-footer text-muted">
+                                2 days ago
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+            
+            
             <div className="text-center">
                 <span> {message} </span>
             </div>
