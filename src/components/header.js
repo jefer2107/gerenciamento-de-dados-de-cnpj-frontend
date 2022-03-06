@@ -45,7 +45,7 @@ export default function Header({menu=false}){
     return(
         <div>
             {menu===true?
-                <nav className="navbar navbar-light bg-light navbar-expand-lg fixed-top">
+                <nav className="navbar navbar-light bg-light navbar-expand-lg fixed-top mb-2">
                     <div className="container-fluid">
                         <h1 className="navbar-brand" href="#">Gerenciamento de dados</h1>
                         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -79,9 +79,8 @@ export default function Header({menu=false}){
                                             <li><Link className="dropdown-item" to="/user-register">Cadastro de usuários</Link></li>
                                         </ul>
                                     </li>
-                                    
+                                    <button onClick={()=>logOut()} type="button" className="btn btn-link text-dark">Sair</button>
                                 </ul>
-                                <span onClick={()=>logOut()} type="button" className="my-2 mx-4">Sair</span>
                                 <form onSubmit={redirectToCnpj} class="d-flex">
                                     <input onChange={changeNumberCNPJ} className="form-control me-2" name="cnpj" type="search" placeholder="Digite o número do cnpj" aria-label="Search"/>
                                     <button type="submit" className="btn btn-outline-primary">Consultar</button>

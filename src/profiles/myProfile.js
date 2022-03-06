@@ -72,11 +72,9 @@ export default function MyProfile(){
     return(
         <>
         <Header menu={menu}/>
-        <div className="d-flex form-style">
-            <form onSubmit={btnEdit===true?saveUser:undefined} className="mx-auto">
-                <h3 className="text-center">{btnEdit===true?"Editar Perfil":"Meu perfil"}</h3>
-                {JSON.stringify(user)}
-                {JSON.stringify(btnEdit)}
+        <div className="form-style my-4">
+            <form onSubmit={btnEdit===true?saveUser:undefined} className="mx-auto my-4">
+                <h3 className="text-center py-2">{btnEdit===true?"Editar Perfil":"Meu perfil"}</h3>
                 <div className="form-group">
                     <label>Nome:</label>
                     <input onChange={btnEdit===true?changeUser:undefined} disabled={!btnEdit} className="form-control" type="text" name="nameUser" value={user.nameUser} />
@@ -91,15 +89,15 @@ export default function MyProfile(){
                 </div>
                 {btnEdit === true?
                 <>
-                <div>
+                <div className='py-2'>
                     <button type="submit" className="tn btn-primary w-100 p-2">Salvar</button>
                 </div>
                 <div className="py-2">
-                    <button onClick={()=> cancelEdit()} type="button" className="tn btn-danger w-100 p-2">Cancelar</button>
+                    <button onClick={()=> cancelEdit()} type="button" className="tn btn-outline-primary w-100 p-2">Cancelar</button>
                 </div>
                 </>
                 :
-                <div className='py-2'>
+                <div className='py-1'>
                     <button type='button' onClick={()=> editUser()} className='btn btn-primary w-100'>Editar Perfil</button>
                 </div>
                 }
