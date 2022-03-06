@@ -83,8 +83,8 @@ export default function UserEdit(){
     return(
         <>
         <Header menu={menu}/>
-        <div className="form-style">
-            <form onSubmit={saveUser} className="mx-auto">
+        <div className="form-style my-4">
+            <form onSubmit={saveUser} className="mx-auto my-4 py-2">
                 <h3 className="text-center">Editar Usuário</h3>
                 <div className="form-group">
                     <label>Nome:</label>

@@ -12,6 +12,7 @@ export default function UserRegister(){
     const token = localStorage.getItem('token')
     const decoded = jwtDecoded(token !== null && token)
     const [menu, setMenu] = useState(false)
+    const [btn, setBtn] = useState(true)
 
     useEffect(()=>{
         setMenu(decoded.admin==="true" && true)
@@ -49,7 +50,12 @@ export default function UserRegister(){
 
         validateUserRegister(user).then(async()=>{
             await sendUser()
-            navigate("/user-list")
+            setBtn(false)
+            setMessage("Aguarde...")
+
+            setTimeout(()=>{
+                navigate("/user-list")
+            },5000)
 
         }).catch((error)=>{
             setMessage(error)
@@ -83,10 +89,25 @@ export default function UserRegister(){
                     </label>
                 </div>
                 <input onChange={changeUser} className="form-control" type='password' name='password' placeholder="Digite a senha" />
-                <button type='submit' className="btn btn-success w-100 my-2">Cadastrar</button>
-                <div className="text-center text-danger">
+                {btn === true?
+                <div>
+                <button type="submit" className="btn btn-success w-100">Cadastrar</button>
+                    <div className="text-center text-danger">
+                        <span> {message} </span>
+                    </div>
+                </div>
+                :
+                <>
+                <div className="d-flex justify-content-center">
+                    <div class="spinner-border text-success" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div className="text-center text-success">
                     <span> {message} </span>
                 </div>
+                </>
+                }
             </form>
         </div>
         </>

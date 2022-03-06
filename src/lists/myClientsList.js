@@ -59,15 +59,15 @@ export default function MyClientsLists(){
             <div className="row my-4 justify-content-center">
                 {clients.length !== 0 && clients.map((x)=>{
                     return(
-                        <div class="card text-center col-lg-4 col-sm-6 m-1 my-2">
-                            <div class="card-header">
+                        <div className="card text-center col-lg-4 col-sm-6 m-1 my-2">
+                            <div className="card-header">
                                 {x.id}
                             </div>
-                            <div class="card-body">
-                                <h5 class="card-title"> {x.fantasy} </h5>
-                                <p class="card-text"> - Nome: {x.name} </p>
-                                <p class="card-text"> - Status: {x.status} </p>
-                                <p class="card-text"> - Usuário: {x.nameUser} </p>
+                            <div className="card-body">
+                                <h5 className="card-title"> {x.fantasy} </h5>
+                                <p className="card-text"> - Nome: {x.name} </p>
+                                <p className="card-text"> - Status: {x.status} </p>
+                                <p className="card-text"> - Usuário: {x.nameUser} </p>
                                 <p>
                                     <button type="button" onClick={()=>moreDetails(x.id)} class="btn btn-primary">Mais detalhes</button>
                                 </p>
@@ -77,7 +77,7 @@ export default function MyClientsLists(){
                                 
                                 
                             </div>
-                            <div class="card-footer text-muted">
+                            <div className="card-footer text-muted">
                                 {moment(x.date).format("DD/MM/YYYY")}
                             </div>
                         </div>
