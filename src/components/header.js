@@ -6,6 +6,7 @@ export default function Header({menu=false}){
     const navigate = useNavigate()
     const [message, setMessage] = useState("")
     const [numberCNPJ, setNumberCNPJ] = useState("")
+    const [btn, setBtn] = useState(true)
 
     const logOut = ()=>{
         localStorage.clear()
@@ -31,8 +32,14 @@ export default function Header({menu=false}){
     }
 
     const redirectToCnpj = (event)=>{
+        event.preventDefault()
         validateCnpj(numberCNPJ.cnpj).then(()=>{
-            navigate(`/client-data/${numberCNPJ.cnpj}`)
+            setBtn(false)
+            setTimeout(()=>{
+                navigate(`/client-data/${numberCNPJ.cnpj}`)
+                setBtn(true)
+                
+            },3000)
 
         }).catch((error)=>{
             setMessage(error)
@@ -41,8 +48,6 @@ export default function Header({menu=false}){
             },7000)
         })
 
-        event.preventDefault()
-        
     }
 
     return(
@@ -84,9 +89,19 @@ export default function Header({menu=false}){
                                     </li>
                                     <button onClick={()=>logOut()} type="button" className="btn btn-link text-dark">Sair</button>
                                 </ul>
+                                
                                 <form onSubmit={redirectToCnpj} class="d-flex">
                                     <input onChange={changeNumberCNPJ} className="form-control me-2" name="cnpj" type="search" placeholder="Digite o número do cnpj" aria-label="Search"/>
-                                    <button type="submit" className="btn btn-outline-primary">Consultar</button>
+                                    {btn === true?
+                                        <button type="submit" className="btn btn-outline-primary">Consultar</button>
+                                    :
+                                    <div className="d-flex justify-content-center">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    }
+                                    
                                 </form>
                                 <div className="text-center text-danger my-2 mx-2">
                                     <span> {message} </span>

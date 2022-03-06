@@ -50,14 +50,11 @@ export default function MyClientsLists(){
             })
     },[])
 
-   
-
     return(
         <>
         <Header menu={menu}/>
         <div className="list container-fluid">
             <h3 className="text-center">Meus Clientes</h3>
-            {JSON.stringify(clients)}
             <table className="container text-center">
                 <thead>
                     <tr>

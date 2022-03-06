@@ -1,17 +1,21 @@
 .list{
   background-color: beige;
   padding: 15%;
-  height: 100vh;
+  height: 100%;
   margin: auto;
 }
 
-.list table{
+/* .list table{
   border: 1px solid black;
-}
+} */
 
-.list table td{
+/* .list table td{
   border: 1px solid black;
-}
+} */
+
+/* .list table .td-status{
+  padding: 5px important;  
+} */
 
 .list table thead{
   background-color: #ddd;

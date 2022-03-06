@@ -66,6 +66,9 @@ export default function UserEdit(){
             navigate("/user-list")
 
         }).catch((error)=>{
+            setTimeout(()=>{
+                setMessage("")
+            },7000)
             setMessage(error)
         })
 
@@ -80,10 +83,9 @@ export default function UserEdit(){
     return(
         <>
         <Header menu={menu}/>
-        <div className="d-flex form-style">
+        <div className="form-style">
             <form onSubmit={saveUser} className="mx-auto">
                 <h3 className="text-center">Editar Usuário</h3>
-                {JSON.stringify(decoded)}
                 <div className="form-group">
                     <label>Nome:</label>
                     <input disabled className="form-control" type="text" name="nameUser" value={user.nameUser} />
@@ -108,13 +110,13 @@ export default function UserEdit(){
                         Administrador
                     </label>
                 </div>
-                <div>
+                <div className='py-2'>
                     <button type="submit" className="tn btn-primary w-100 p-2">Salvar</button>
                 </div>
                 <div className="py-2">
-                    <button onClick={()=> cancelEdit()} type="button" className="tn btn-danger w-100 p-2">Cancelar</button>
+                    <button onClick={()=> cancelEdit()} type="button" className="tn btn-outline-primary w-100 p-2">Cancelar</button>
                 </div>
-                <div className="text-center">
+                <div className="text-center text-danger">
                     <span> {message} </span>
                 </div>
             </form>
