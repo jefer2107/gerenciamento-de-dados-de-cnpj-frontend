@@ -53,23 +53,23 @@ export default function UserRegister(){
 
         }).catch((error)=>{
             setMessage(error)
+            setTimeout(()=>{
+                setMessage("")
+            },7000)
             console.log(error)
         })
         
-
         event.preventDefault()
     }
 
     return(
         <>
         <Header menu={menu}/>
-        <div className="form-style d-flex">
-            <form onSubmit={registerUser} className="mx-auto">
-                <h3 className="text-center">Cadastro de usuários</h3>
-                {JSON.stringify(user)}
-                {console.log(user)}
+        <div className="form-style d-flex my-4">
+            <form onSubmit={registerUser} className="mx-auto my-4 py-2">
+                <h3 className="text-center">Cadastrar usuário</h3>
                 <input onChange={changeUser} className="form-control" type='text' name='nameUser' placeholder="Digite o nome" />
-                <input onChange={changeUser} className="form-control" type='text' name='email' placeholder="Digite o email" />
+                <input onChange={changeUser} className="form-control" type='email' name='email' placeholder="Digite o email" />
                 <div class="form-check">
                     <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault1"/>
                     <label className="form-check-label" for="flexRadioDefault1">
@@ -82,9 +82,9 @@ export default function UserRegister(){
                         Administrador
                     </label>
                 </div>
-                <input onChange={changeUser} className="form-control" type='text' name='password' placeholder="Digite a senha" />
-                <button type='submit' className="btn btn-success w-100">Cadastrar</button>
-                <div className="text-center">
+                <input onChange={changeUser} className="form-control" type='password' name='password' placeholder="Digite a senha" />
+                <button type='submit' className="btn btn-success w-100 my-2">Cadastrar</button>
+                <div className="text-center text-danger">
                     <span> {message} </span>
                 </div>
             </form>

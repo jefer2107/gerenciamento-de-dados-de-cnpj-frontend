@@ -17,7 +17,7 @@ export const validateUserRegister = async (user=null)=>{
         })
 
         try {
-            const {data} = await axios.get(`http://localhost:3001/users/getAll`)
+            const {data} = await axios.get(`http://localhost:3001/users/getAllunauthenticated`)
 
             const newData = data.length !== 0? data.filter(e=> e.email === user.email): null
 

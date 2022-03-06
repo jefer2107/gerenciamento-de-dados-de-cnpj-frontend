@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Header({menu=false}){
     const navigate = useNavigate()
-    const [message, setMessage] = useState("dddddlllllllllllllll")
+    const [message, setMessage] = useState("")
     const [numberCNPJ, setNumberCNPJ] = useState("")
 
     const logOut = ()=>{
@@ -36,6 +36,9 @@ export default function Header({menu=false}){
 
         }).catch((error)=>{
             setMessage(error)
+            setTimeout(()=>{
+                setMessage("")
+            },7000)
         })
 
         event.preventDefault()
@@ -85,7 +88,7 @@ export default function Header({menu=false}){
                                     <input onChange={changeNumberCNPJ} className="form-control me-2" name="cnpj" type="search" placeholder="Digite o número do cnpj" aria-label="Search"/>
                                     <button type="submit" className="btn btn-outline-primary">Consultar</button>
                                 </form>
-                                <div className="text-center my-2 mx-2">
+                                <div className="text-center text-danger my-2 mx-2">
                                     <span> {message} </span>
                                 </div>
                             </div>

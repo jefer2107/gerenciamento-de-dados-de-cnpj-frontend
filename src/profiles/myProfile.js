@@ -53,12 +53,12 @@ export default function MyProfile(){
             
         }).catch((error)=>{
             setMessage(error)
+            setTimeout(()=>{
+                setMessage("")
+            },7000)
         })
 
-        setMessage("")
-
         event.preventDefault()
-
     }
 
     const cancelEdit = ()=>{
@@ -101,7 +101,7 @@ export default function MyProfile(){
                     <button type='button' onClick={()=> editUser()} className='btn btn-primary w-100'>Editar Perfil</button>
                 </div>
                 }
-                <div className="text-center">
+                <div className="text-center text-danger">
                     <span> {message} </span>
                 </div>
             </form>

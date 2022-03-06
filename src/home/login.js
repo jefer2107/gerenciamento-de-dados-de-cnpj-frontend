@@ -37,11 +37,14 @@ export default function Login(){
 
             setTimeout(()=>{
                 navigate("/my-client-list")
-            },7000)
+            },5000)
         }).catch((error)=>{
+            setTimeout(()=>{
+                setMessage("")
+            },7000)
             setMessage(error)
         })
-
+        
     }
 
     return(
