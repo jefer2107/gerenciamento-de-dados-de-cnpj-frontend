@@ -207,7 +207,7 @@ export default function ClientData(){
                         </tr>
                     </thead>
                     <tbody className="text-center">
-                        {clients.secondary_activity.length !== 0 && clients.secondary_activity.map((x)=>{
+                        {!clients.secondary_activity?null: clients.secondary_activity.map((x)=>{
                             return(
                                 <tr>
                                     <td> {x.text} </td>
@@ -225,7 +225,7 @@ export default function ClientData(){
                         </tr>
                     </thead>
                     <tbody className="text-center">
-                        {clients.qsa.length !== 0 && clients.qsa.map((x)=>{
+                        {!clients.qsa? null: clients.qsa.map((x)=>{
                             return(
                                 <tr>
                                     <td> {x.qual} </td>

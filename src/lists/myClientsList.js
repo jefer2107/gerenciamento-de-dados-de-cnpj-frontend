@@ -68,12 +68,15 @@ export default function MyClientsLists(){
                                 <p className="card-text"> - Nome: {x.name} </p>
                                 <p className="card-text"> - Status: {x.status} </p>
                                 <p className="card-text"> - Usuário: {x.nameUser} </p>
-                                <p>
+                                {/* <p>
                                     <button type="button" onClick={()=>moreDetails(x.id)} class="btn btn-primary">Mais detalhes</button>
                                 </p>
                                 <p>
                                     <button onClick={()=>removeClient(x.id)} type="button" className="btn btn-danger">Excluir</button>
-                                </p>
+                                </p> */}
+                                <button type="button" onClick={()=>moreDetails(x.id)} class="btn btn-primary m-1">Mais detalhes</button>
+                                <button onClick={()=>removeClient(x.id)} type="button" className="btn btn-danger m-1">Excluir</button>
+                                
                                 
                                 
                             </div>

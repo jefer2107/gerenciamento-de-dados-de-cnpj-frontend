@@ -60,7 +60,7 @@ export default function ClientList(){
                     )
                 })}
             </div>
-            <div className="text-center">
+            <div className="text-center text-danger">
                 <span> {message} </span>
             </div>
         </div>
