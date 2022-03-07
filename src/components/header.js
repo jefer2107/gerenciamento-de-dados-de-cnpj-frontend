@@ -131,7 +131,6 @@ export default function Header({menu=false}){
                                             Clientes
                                         </Link>
                                         <ul className="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                                            <li><Link className="dropdown-item" to="/client-list">Lista de clientes</Link></li>
                                             <li><Link className="dropdown-item" to="/my-client-list">Meus clientes</Link></li>
                                         </ul>
                                     </li>
