@@ -99,22 +99,22 @@ export default function UserEdit(){
                     <input disabled className="form-control" type="email" name="email" value={user.admin === "true"? "Sim": "Não"} />
                 </div>
                 <div className="form-check">
-                    <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault1" />
+                    <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault1"/>
                     <label className="form-check-label" for="flexRadioDefault1">
                         Usuário
                     </label>
                 </div>
                 <div className="form-check">
-                    <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault2" />
+                    <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault2"/>
                     <label className="form-check-label" for="flexRadioDefault2">
                         Administrador
                     </label>
                 </div>
                 <div className='py-2'>
-                    <button type="submit" className="tn btn-primary w-100 p-2">Salvar</button>
+                    <button type="submit" className="btn btn-primary w-100 p-2">Salvar</button>
                 </div>
                 <div className="py-2">
-                    <button onClick={()=> cancelEdit()} type="button" className="tn btn-outline-primary w-100 p-2">Cancelar</button>
+                    <button onClick={()=> cancelEdit()} type="button" className="btn btn-outline-secondary w-100 p-2">Cancelar</button>
                 </div>
                 <div className="text-center text-danger">
                     <span> {message} </span>

@@ -51,7 +51,7 @@ export default function UserRegister(){
         validateUserRegister(user).then(async()=>{
             await sendUser()
             setBtn(false)
-            setMessage("Aguarde...")
+            setMessage("Registrando...")
 
             setTimeout(()=>{
                 navigate("/user-list")
@@ -74,10 +74,11 @@ export default function UserRegister(){
         <div className="form-style d-flex my-4">
             <form onSubmit={registerUser} className="mx-auto my-4 py-2">
                 <h3 className="text-center">Cadastrar usuário</h3>
+                {JSON.stringify(user)}
                 <input onChange={changeUser} className="form-control" type='text' name='nameUser' placeholder="Digite o nome" />
                 <input onChange={changeUser} className="form-control" type='email' name='email' placeholder="Digite o email" />
                 <div class="form-check">
-                    <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault1"/>
+                    <input onChange={changeUser} className="form-check-input" type="radio" name="admin" id="flexRadioDefault1" checked={user.admin==="true"?undefined:true}/>
                     <label className="form-check-label" for="flexRadioDefault1">
                         Usuário
                     </label>

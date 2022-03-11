@@ -38,11 +38,14 @@ export default function Login(){
             setTimeout(()=>{
                 navigate("/my-client-list")
             },5000)
+
         }).catch((error)=>{
+            setMessage(error)
+
             setTimeout(()=>{
                 setMessage("")
-            },7000)
-            setMessage(error)
+            },4000)
+
         })
         
     }
@@ -53,7 +56,7 @@ export default function Login(){
             <form onSubmit={loginUser} className="mx-auto">
                 <div className="mb-3">
                     <label for="exampleInputEmail1" className="form-label">Email</label>
-                    <input onChange={changeUser} className="form-control" type='email' name='email'/>
+                    <input onChange={changeUser} className="form-control" type='text' name='email'/>
                 </div>
                 <div className="mb-3">
                     <label for="exampleInputPassword1" className="form-label">Senha</label>

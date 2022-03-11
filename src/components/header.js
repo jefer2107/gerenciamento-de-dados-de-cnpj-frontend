@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import InputMask from 'react-input-mask';
 
 
 export default function Header({menu=false}){
@@ -33,6 +34,7 @@ export default function Header({menu=false}){
 
     const redirectToCnpj = (event)=>{
         event.preventDefault()
+        
         validateCnpj(numberCNPJ.cnpj).then(()=>{
             setBtn(false)
             setTimeout(()=>{
@@ -44,7 +46,7 @@ export default function Header({menu=false}){
             setMessage(error)
             setTimeout(()=>{
                 setMessage("")
-            },7000)
+            },3000)
         })
 
     }
@@ -90,7 +92,7 @@ export default function Header({menu=false}){
                                 </ul>
                                 
                                 <form onSubmit={redirectToCnpj} class="d-flex">
-                                    <input onChange={changeNumberCNPJ} className="form-control me-2" name="cnpj" type="search" placeholder="Digite o número do cnpj" aria-label="Search"/>
+                                    <InputMask mask="99999999999999" onChange={changeNumberCNPJ} className="form-control me-2" name="cnpj" type="search" placeholder="Digite o número do cnpj" aria-label="Search"/>
                                     {btn === true?
                                         <button type="submit" className="btn btn-outline-primary">Consultar</button>
                                     :
@@ -137,7 +139,7 @@ export default function Header({menu=false}){
                                 </ul>
                                 <span onClick={()=>logOut()} type="button" className="my-2 mx-4">Sair</span>
                                 <form onSubmit={redirectToCnpj} class="d-flex">
-                                    <input onChange={changeNumberCNPJ} className="form-control me-2" name="cnpj" type="search" placeholder="Digite o número do cnpj" aria-label="Search"/>
+                                    <InputMask mask="99999999999999" onChange={changeNumberCNPJ} className="form-control me-2" name="cnpj" type="search" placeholder="Digite o número do cnpj" aria-label="Search"/>
                                     <button type="submit" className="btn btn-outline-primary">Consultar</button>
                                 </form>
                                 <div className="text-center my-2 mx-2">

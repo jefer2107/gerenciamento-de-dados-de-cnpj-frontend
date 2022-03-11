@@ -8,7 +8,6 @@ import { validateMyProfile } from '../validation/validateMyProfile'
 export default function MyProfile(){
     const [user, setUser] = useState({nameUser:"",email:""})
     const [btnEdit, setBtnEdit] = useState(false)
-    const navigate = useNavigate()
     const token = localStorage.getItem('token')
     const decoded = jwtDecoded(token !== null && token)
     const [menu, setMenu] = useState(false)
@@ -90,10 +89,10 @@ export default function MyProfile(){
                 {btnEdit === true?
                 <>
                 <div className='py-2'>
-                    <button type="submit" className="tn btn-primary w-100 p-2">Salvar</button>
+                    <button type="submit" className="btn btn-primary w-100 p-2">Salvar</button>
                 </div>
                 <div className="py-2">
-                    <button onClick={()=> cancelEdit()} type="button" className="tn btn-outline-primary w-100 p-2">Cancelar</button>
+                    <button onClick={()=> cancelEdit()} type="button" className="btn btn-outline-secondary w-100 p-2">Cancelar</button>
                 </div>
                 </>
                 :

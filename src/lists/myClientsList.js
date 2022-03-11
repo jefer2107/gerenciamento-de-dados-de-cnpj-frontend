@@ -24,15 +24,14 @@ export default function MyClientsLists(){
     const removeClient = (id)=>{
         axios.delete(`http://localhost:3001/clients/${id}/removeItem`)
             .then(()=>{
-                setMessage("Removido")
-                // setClients((state)=>{
-                //     const newClients = [...state]
-                //     const itemToBeRemove = clients.findIndex(e=> e.id === id)
+                setClients((state)=>{
+                    const newClients = [...state]
+                    const itemToBeRemove = clients.findIndex(e=> e.id === id)
         
-                //     newClients.splice(itemToBeRemove, 1)
+                    newClients.splice(itemToBeRemove, 1)
         
-                //     return newClients
-                // })
+                    return newClients
+                })
             })
             .catch((error)=>{
                 setMessage(error)
@@ -68,17 +67,8 @@ export default function MyClientsLists(){
                                 <p className="card-text"> - Nome: {x.name} </p>
                                 <p className="card-text"> - Status: {x.status} </p>
                                 <p className="card-text"> - Usuário: {x.nameUser} </p>
-                                {/* <p>
-                                    <button type="button" onClick={()=>moreDetails(x.id)} class="btn btn-primary">Mais detalhes</button>
-                                </p>
-                                <p>
-                                    <button onClick={()=>removeClient(x.id)} type="button" className="btn btn-danger">Excluir</button>
-                                </p> */}
                                 <button type="button" onClick={()=>moreDetails(x.id)} class="btn btn-primary m-1">Mais detalhes</button>
                                 <button onClick={()=>removeClient(x.id)} type="button" className="btn btn-danger m-1">Excluir</button>
-                                
-                                
-                                
                             </div>
                             <div className="card-footer text-muted">
                                 {moment(x.date).format("DD/MM/YYYY")}
